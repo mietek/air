@@ -36,6 +36,7 @@ library
                   , Air.Light
                   , Air.Env
                   , Air.Here.TH
+                  , Air.TH
                   , Air.Control.Monad.ListBuilder
                   , Air.Control.Monad.ObjectBuilder
                   , Air.Data.Record.SimpleLabel
