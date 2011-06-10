@@ -14,9 +14,7 @@ homepage:             https://github.com/nfjinjing/air
 data-files:           readme.md, changelog.md, known-issues.md
 
 library
-  ghc-options: -Wall
 
-      
   build-depends:  
                   base >= 4 && < 5
                 , containers
@@ -30,7 +28,9 @@ library
                 , data-default
                 , dlist
                 , mtl
+
   hs-source-dirs: src/
+
   exposed-modules:  
                     Air
                   , Air.Light
