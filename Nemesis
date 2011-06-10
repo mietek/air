@@ -1,0 +1,21 @@
+nemesis = do
+  
+  clean
+    [ "**/*.hi"
+    , "**/*.o"
+    , "manifest"
+    ]
+    
+  desc "prepare cabal dist"
+  task "dist" - do
+    sh "cabal clean"
+    sh "cabal configure"
+    sh "cabal sdist"
+
+  desc "run shell"
+  task "i" - do
+    sh "ghci -isrc src/Air.hs"
+  
+  desc "put all .hs files in manifest"
+  task "manifest" - do
+    sh "find . | grep 'hs$' > manifest"
