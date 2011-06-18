@@ -7,7 +7,7 @@ import Data.Char
 import Data.Foldable (elem, foldl, foldl', toList, Foldable)
 import Data.Function (on)
 import Debug.Trace
-import Prelude hiding ((.), (^), (>), (<), (/), (-), elem, foldl, foldl1, length, drop)
+import Prelude hiding ((.), (^), (>), (<), (/), (-), elem, foldl, foldl1, length, drop, take, splitAt, replicate, (!!))
 import qualified Prelude as P
 import System.FilePath ((</>))
 import qualified Data.Array as A
@@ -85,7 +85,7 @@ is_unique xs = xs.unique.length == xs.length
 same :: (Ord a) => [a] -> Bool
 same = unique > length > is 1
 
-times :: b -> Int -> [b]
+times :: (Integral i) => b -> i -> [b]
 times = flip replicate
 
 upto :: (Enum a) => a -> a -> [a]
@@ -94,18 +94,18 @@ upto = flip enumFromTo
 downto :: (Num t, Enum t) => t -> t -> [t]
 downto m n = [n, n <-> 1.. m]
 
-remove_at :: Int -> [a] -> [a]
+remove_at :: (Integral i) => i -> [a] -> [a]
 remove_at n xs = xs.take n ++ xs.drop (n+1)
 
-insert_at, replace_at :: Int -> a -> [a] -> [a]
+insert_at, replace_at :: (Integral i) => i -> a -> [a] -> [a]
 insert_at n x xs  = splitted.fst ++ [x] ++ splitted.snd 
   where splitted  = xs.splitAt n
 replace_at n x xs = xs.take n ++ [x] ++ xs.drop (n+1)
 
-slice :: Int -> Int -> [a] -> [a]
+slice :: (Integral i) => i -> i -> [a] -> [a]
 slice l r = take r > drop l
 
-cherry_pick :: [Int] -> [a] -> [a]
+cherry_pick :: (Integral i) => [i] -> [a] -> [a]
 cherry_pick ids xs  = ids.map(xs !!)
 
 reduce, reduce' :: (a -> a -> a) -> [a] -> a
@@ -138,11 +138,11 @@ label_by f = map (f &&& id)
 labeling :: (a -> c') -> [a] -> [(a, c')]
 labeling f = map(id &&& f)
 
-in_group_of :: Int -> [t] -> [[t]]
+in_group_of :: (Integral i) => i -> [t] -> [[t]]
 in_group_of _ [] = []
 in_group_of n xs = h : t.in_group_of(n) where (h, t) = xs.splitAt(n)
 
-split_to :: Int -> [a] -> [[a]]
+split_to :: (Integral i) => i -> [a] -> [[a]]
 split_to n xs = xs.in_group_of(size) where
   l = xs.length
   size = if l P.< n then 1 else l `div` n
@@ -161,7 +161,7 @@ has = flip belongs_to
 indexed :: (Num t, Enum t) => [b] -> [(t, b)]
 indexed = zip([0..])
 
-ljust, rjust :: Int -> a -> [a] -> [a]
+ljust, rjust :: (Integral i) => i -> a -> [a] -> [a]
 rjust n x xs 
   | n P.< xs.length = xs
   | otherwise     = ( n.times x ++ xs ).reverse.take n.reverse
@@ -283,7 +283,7 @@ trace' x = trace (x.show) x
 
 
 -- New from Lab
-at :: (Show a) => Int -> [a] -> a
+at :: (Show a, Integral i) => i -> [a] -> a
 at i xs = if i P.< xs.length
   then xs !! i
   else error - show xs ++ " at " ++ show i ++ " failed"
@@ -295,10 +295,25 @@ don't :: (Monad m) => m a -> m ()
 don't = const - return ()
 
 length :: (Num i) => [a] -> i
-length = genericLength
+length = L.genericLength
 
 drop :: (Integral i) => i -> [a] -> [a]
-drop = genericDrop
+drop = L.genericDrop
+
+take :: Integral i => i -> [a] -> [a]
+take = L.genericTake
+
+splitAt :: Integral i => i -> [b] -> ([b], [b])
+splitAt = L.genericSplitAt
+
+index :: Integral a => [b] -> a -> b
+index = L.genericIndex
+
+replicate :: Integral i => i -> a -> [a]
+replicate = L.genericReplicate
+
+(!!) :: Integral a => [b] -> a -> b
+(!!) = index
 
 to_f :: (Real a, Fractional b) => a -> b
 to_f = realToFrac 

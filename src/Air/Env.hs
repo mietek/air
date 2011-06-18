@@ -8,7 +8,7 @@ module Air.Env (
 ) where
 
 import Air.Light
-import Prelude hiding ((.), (>), (<), (^), (/), (-), (+), drop, length)
+import Prelude hiding ((.), (>), (<), (^), (/), (-), (+), length, drop, take, splitAt, replicate, (!!))
 import Data.Monoid.Owns ((+))
 import Air.Control.Monad.ListBuilder
 import Air.Control.Monad.ObjectBuilder
