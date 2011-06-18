@@ -12,7 +12,7 @@ import qualified Data.Map as M
 
 import Data.Int (Int8, Int16, Int32, Int64)
 import Data.Word (Word8, Word16, Word32, Word64)
-
+import Data.Time (Day(..), TimeOfDay, midnight, UTCTime(..), DiffTime, secondsToDiffTime)
 -- | A class for types with a default value.
 class Default a where
     -- | The default value for this type.
@@ -71,3 +71,14 @@ instance (Default a, Default b, Default c, Default d) => Default (a, b, c, d) wh
 instance (Default a, Default b, Default c, Default d, Default e) => Default (a, b, c, d, e) where
   def = (def, def, def, def, def)
 
+instance Default Day where
+  def = ModifiedJulianDay def
+
+instance Default DiffTime where
+  def = secondsToDiffTime def
+
+instance Default UTCTime where
+  def = UTCTime def def
+
+instance Default TimeOfDay where
+  def = midnight
