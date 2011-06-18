@@ -17,7 +17,7 @@ import qualified Data.Set as S
 import Data.List ( genericDrop, genericLength )
 
 import qualified Control.Monad as Monad
-
+import Control.Monad.IO.Class
 import Control.Concurrent
 import System.Exit ( exitWith, ExitCode(ExitSuccess) )
 
@@ -344,3 +344,6 @@ squeeze = Monad.join
 
 end :: (Monad m) => m ()
 end = return ()
+
+io :: (MonadIO m) => IO a -> m a
+io = liftIO
