@@ -26,6 +26,7 @@ library
                 , template-haskell
                 , dlist
                 , mtl
+                , time
 
   hs-source-dirs: src/
 
