@@ -43,3 +43,5 @@ library
                   , Air.Control.Monad.ObjectBuilder
                   , Air.Data.Record.SimpleLabel
                   , Air.Data.Record.SimpleLabel.TH
+                  , Air.Data.Default
+                  , Air.Data.Monoid
