@@ -14,7 +14,12 @@ nemesis = do
 
   desc "run shell"
   task "i" - do
-    sh "ghci -isrc src/Air.hs"
+    sh "ghci -isrc -XTemplateHaskell src/Air.hs"
+    
+  desc "run test shell"
+  task "t" - do
+    sh "ghci -isrc -XTemplateHaskell -ddump-splices src/Test.hs"
+  
   
   desc "put all .hs files in manifest"
   task "manifest" - do

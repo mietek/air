@@ -1,5 +1,5 @@
 Name:                 air
-Version:              2011.6.12
+Version:              2011.6.18
 Build-type:           Simple
 Synopsis:             air
 Description:          An alternative Haskell Prelude library.
@@ -35,7 +35,9 @@ library
                     Air
                   , Air.Light
                   , Air.Env
-                  , Air.Here.TH
+                  , Air.TH.Here
+                  , Air.TH.Default
+                  , Air.TH.Air
                   , Air.TH
                   , Air.Control.Monad.ListBuilder
                   , Air.Control.Monad.ObjectBuilder

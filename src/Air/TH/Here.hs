@@ -1,6 +1,6 @@
 -- {-# LANGUAGE CPP #-}
 
-module Air.Here.TH where
+module Air.TH.Here where
 
 import Language.Haskell.TH.Quote 
 import Language.Haskell.TH.Syntax 
@@ -14,3 +14,5 @@ here =
       quoteExp = litE . stringL
     , quotePat = litP . stringL
     }
+
+
