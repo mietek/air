@@ -15,6 +15,22 @@ import Data.Default
 -- runQ [d| instance Default Dummy where def = Dummy {test_field_1 = def, test_field_2 = def} |]
 -- [InstanceD [] (AppT (ConT Data.Default.Default) (ConT Main.Dummy)) [ValD (VarP def) (NormalB (RecConE Main.Dummy [(Main.test_field_1,VarE def),(Main.test_field_2,VarE def)])) []]]
 
+-- Example:
+
+-- data Dummy = Dummy
+--   {
+--     test_field_1 :: String
+--   , test_field_2 :: Integer
+--   }
+--   deriving (Show)
+-- 
+-- mkDefault ''Dummy
+-- 
+-- gives:
+
+-- instance Default Dummy where
+--     { def = Dummy {test_field_1 = def, test_field_2 = def} }
+
 
 mkDefault :: Name -> Q [Dec]
 mkDefault name = do
@@ -24,7 +40,7 @@ mkDefault name = do
       case x of
         (DataD _ data_name _ recs _)  -> do
           case recs of
-            [] -> error $ "no phontom type"
+            [] -> error $ "no phantom type"
             (RecC record_name fields):_ -> do
               let def_name = mkName "def"
               let def_fields = map (\(field_name, _, _) -> (field_name, VarE def_name)) fields
