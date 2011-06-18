@@ -39,6 +39,7 @@ library
                   , Air.TH.Default
                   , Air.TH.Air
                   , Air.TH
+                  , Air.SimpleMath
                   , Air.Control.Monad.ListBuilder
                   , Air.Control.Monad.ObjectBuilder
                   , Air.Data.Record.SimpleLabel

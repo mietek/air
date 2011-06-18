@@ -151,11 +151,6 @@ apply, send_to :: a -> (a -> b) -> b
 apply x f = f x
 send_to   = apply
 
-let_receive :: (a -> b -> c) -> b -> a -> c
-let_receive f = flip f
-
-map_send_to :: a -> [a -> b] -> [b]
-map_send_to x = map (send_to(x))
 
 belongs_to :: (Foldable t, Eq a) => t a -> a -> Bool
 belongs_to = flip elem
@@ -165,9 +160,6 @@ has = flip belongs_to
 
 indexed :: (Num t, Enum t) => [b] -> [(t, b)]
 indexed = zip([0..])
-
-map_with_index :: (Num t, Enum t) => ((t, b) -> b1) -> [b] -> [b1]
-map_with_index f = indexed > map f
 
 ljust, rjust :: Int -> a -> [a] -> [a]
 rjust n x xs 
@@ -179,39 +171,11 @@ ljust n x xs
   | otherwise     = ( xs ++ n.times x ).take n
 
 
-powerslice :: [a] -> [[a]]
-powerslice xs = [ xs.slice j (j+i) |
-  i <- l.downto 1,
-  j <- [0..l <-> i]
-  ]
-  where l = xs.length
-
--- only works for sorted list
--- but could be infinite 
--- e.g. a `common` b `common` c
-common :: (Ord a) => [a] -> [a] -> [a]
-common _ []   = []
-common [] _   = []
-common a@(x:xs) b@(y:ys)
-  | x .is y   = y : common xs b
-  | x P.< y     = common xs b
-  | otherwise = common a ys
-
 
 -- faster reverse sort
 rsort :: (Ord a) => [a] -> [a]
 rsort xs = xs.L.sortBy(\a b -> b `compare` a)
 
-encode :: (Eq a) => [a] -> [(Int, a)]
-encode xs = xs.L.group.map (length &&& head)
-
-decode :: [(Int, a)] -> [a]
-decode xs = xs.map(\(l,x) -> l.times x).join'
-
-
-only_one :: [a] -> Bool
-only_one [_]    = True
-only_one _      = False
 
 concat_map :: (a -> [b]) -> [a] -> [b]
 concat_map = concatMap
@@ -235,8 +199,6 @@ to_a xs      = A.listArray (0, xs.length <-> 1) xs
 to_a' :: (A.Ix i) => (i, i) -> [e] -> A.Array i e
 to_a' i xs = A.listArray i xs
 
-hist :: (Num e, A.Ix i) =>  (i, i) -> [i] -> A.Array i e
-hist bnds ns = A.accumArray (+) 0 bnds [(n, 1) | n <- ns, A.inRange bnds n]
 
 -- Ord
 compare_by :: (Ord b) => (a -> b) -> a -> a -> Ordering
@@ -283,12 +245,6 @@ map_fst f = map(\(a,b) -> (f a, b))
 map_snd :: (a -> b) -> [(c, a)] -> [(c, b)]
 map_snd f = map(\(a,b) -> (a, f b))
 
-pair :: ((a, b) -> c) -> a -> b -> c
-pair f a b = f (a,b) 
-
-triple :: ((a, b, c) -> d) -> a -> b -> c -> d
-triple f a b c = f (a,b,c)
-
 splat :: (a -> b -> c) -> (a, b) -> c
 splat f (a,b) = f a b
 
@@ -302,8 +258,6 @@ twin x = (x,x)
 from_i :: (Integral a, Num b) => a -> b
 from_i = fromIntegral
 
-explode :: (Show a) => a -> [Int]
-explode n = n.show.map digitToInt
 
 -- String
 lower, upper :: String -> String
