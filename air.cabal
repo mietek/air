@@ -28,6 +28,7 @@ library
                 , data-default
                 , dlist
                 , mtl
+                , transformers
 
   hs-source-dirs: src/
 
