@@ -17,7 +17,7 @@ import qualified Data.Set as S
 import Data.List ( genericDrop, genericLength )
 
 import qualified Control.Monad as Monad
-import Control.Monad.IO.Class
+import Control.Monad.Trans (liftIO, MonadIO)
 import Control.Concurrent
 import System.Exit ( exitWith, ExitCode(ExitSuccess) )
 
