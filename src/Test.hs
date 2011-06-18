@@ -5,7 +5,7 @@ import Language.Haskell.TH
 import Air.Env
 import Air.TH
 import Prelude ()
-import Data.Default
+import Air.Data.Default
 
 data Dummy = Dummy
   {

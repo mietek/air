@@ -3,7 +3,7 @@
 module Air.TH.Default where
 
 import Language.Haskell.TH
-import Data.Default
+import Air.Data.Default
 
 
 -- $(reify ''Dummy >>= show > stringE)

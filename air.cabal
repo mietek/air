@@ -24,8 +24,6 @@ library
                 , directory
                 , filepath
                 , template-haskell
-                , monoid-owns
-                , data-default
                 , dlist
                 , mtl
 

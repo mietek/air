@@ -3,7 +3,7 @@ module Air.Control.Monad.ObjectBuilder where
 
 import Control.Monad.State
 
-import Data.Default
+import Air.Data.Default
 
 type ObjectBuilder a = State a ()
 
