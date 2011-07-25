@@ -21,6 +21,9 @@ import Control.Monad.Trans (liftIO, MonadIO)
 import Control.Concurrent
 import System.Exit ( exitWith, ExitCode(ExitSuccess) )
 
+import qualified Data.ByteString.Lazy.Char8 as LazyByteString
+import qualified Data.ByteString.Char8 as StrictByteString
+
 
 -- base DSL
 {-# INLINE (.) #-}
@@ -347,3 +350,9 @@ end = return ()
 
 io :: (MonadIO m) => IO a -> m a
 io = liftIO
+
+l2s :: LazyByteString.ByteString -> StrictByteString.ByteString
+l2s x = StrictByteString.concat - LazyByteString.toChunks x
+
+s2l :: StrictByteString.ByteString -> LazyByteString.ByteString
+s2l x = LazyByteString.fromChunks [x]
