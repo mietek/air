@@ -1,5 +1,5 @@
 Name:                 air
-Version:              2011.7.25
+Version:              2011.10.19
 Build-type:           Simple
 Synopsis:             air
 Description:          An alternative Haskell Prelude library.
@@ -45,3 +45,4 @@ library
                   , Air.Data.Record.SimpleLabel.TH
                   , Air.Data.Default
                   , Air.Data.Monoid
+                  , Air.Data.Managed
