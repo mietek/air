@@ -286,7 +286,7 @@ trace' x = trace (x.show) x
 
 
 -- New from Lab
-at :: (Show a, Integral i) => i -> [a] -> a
+at :: (Show a, Integral i, Show i) => i -> [a] -> a
 at i xs = if i P.< xs.length
   then xs !! i
   else error - show xs ++ " at " ++ show i ++ " failed"
