@@ -21,6 +21,8 @@ import Control.Monad.Trans (liftIO, MonadIO)
 import Control.Concurrent
 import System.Exit ( exitWith, ExitCode(ExitSuccess) )
 
+import Control.Applicative ((<$>), (<*>))
+
 import qualified Data.ByteString.Lazy.Char8 as LazyByteString
 import qualified Data.ByteString.Char8 as StrictByteString
 
@@ -356,3 +358,12 @@ l2s x = StrictByteString.concat - LazyByteString.toChunks x
 
 s2l :: StrictByteString.ByteString -> LazyByteString.ByteString
 s2l x = LazyByteString.fromChunks [x]
+
+ap2 f x1 z                      = f <$> x1 <*> z 
+ap3 f x1 x2 z                   = ap2 f x1 x2 <*> z
+ap4 f x1 x2 x3 z                = ap3 f x1 x2 x3 <*> z
+ap5 f x1 x2 x3 x4 z             = ap4 f x1 x2 x3 x4 <*> z
+ap6 f x1 x2 x3 x4 x5 z          = ap5 f x1 x2 x3 x4 x5 <*> z
+ap7 f x1 x2 x3 x4 x5 x6 z       = ap6 f x1 x2 x3 x4 x5 x6 <*> z
+ap8 f x1 x2 x3 x4 x5 x6 x7 z    = ap7 f x1 x2 x3 x4 x5 x6 x7 <*> z
+ap9 f x1 x2 x3 x4 x5 x6 x7 x8 z = ap8 f x1 x2 x3 x4 x5 x6 x7 x8 <*> z
