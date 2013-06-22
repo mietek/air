@@ -271,8 +271,6 @@ to_s = show
 trace' :: (Show a) => a -> a
 trace' x = trace (x.show) x
 
-
-
 -- New from Lab
 void :: (Monad m) => m a -> m ()
 void x = x >>= const () > return
