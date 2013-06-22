@@ -12,3 +12,5 @@ manifest
 /dist
 
 .DS_Store
+
+.bin

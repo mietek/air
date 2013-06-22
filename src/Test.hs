@@ -6,6 +6,7 @@ import Air.Env
 import Air.TH
 import Prelude ()
 import Air.Data.Default
+import System.Nemesis.Titan
 
 data Dummy = Dummy
   {
@@ -15,4 +16,7 @@ data Dummy = Dummy
   deriving (Show)
 
 mkDefault ''Dummy
+
+main = 
+  halt
 

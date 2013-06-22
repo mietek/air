@@ -1,0 +1,23 @@
+
+guard :shell do
+  event_time = Time.now
+  update_time = Time.now
+  update_interval = 0.1
+  
+  watch(%r{^src/.+hs$}) do |m|
+    puts "Changed #{m[0]}"
+    event_time = Time.now
+  end
+
+  # compile at most once for every $update_interval seconds
+  Thread.new do 
+    while true
+      sleep update_interval
+      if event_time > update_time 
+        update_time = Time.now
+        system("runghc Nemesis Test/compile-and-kill")
+      end
+    end
+  end
+  
+end
