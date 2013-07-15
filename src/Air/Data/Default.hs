@@ -52,10 +52,10 @@ instance Default B.ByteString where
 instance Default L.ByteString where
   def = L.empty
 
-instance ST.Text where
+instance Default ST.Text where
   def = ST.empty
 
-instance LT.Text where
+instance Default LT.Text where
   def = LT.empty
 
 
