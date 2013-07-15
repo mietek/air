@@ -13,6 +13,10 @@ import qualified Data.Map as M
 import Data.Int (Int8, Int16, Int32, Int64)
 import Data.Word (Word8, Word16, Word32, Word64)
 import Data.Time (Day(..), TimeOfDay, midnight, UTCTime(..), DiffTime, secondsToDiffTime)
+
+import qualified Data.Text as ST
+import qualified Data.Text.Lazy as LT
+
 -- | A class for types with a default value.
 class Default a where
     -- | The default value for this type.
@@ -47,6 +51,12 @@ instance Default B.ByteString where
 
 instance Default L.ByteString where
   def = L.empty
+
+instance ST.Text where
+  def = ST.empty
+
+instance LT.Text where
+  def = LT.empty
 
 
 instance Default Int8 where def = 0
