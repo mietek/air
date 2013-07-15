@@ -14,6 +14,9 @@ import qualified Data.Sequence as Sequence
 import Data.Int (Int8, Int16, Int32, Int64)
 import Data.Word (Word8, Word16, Word32, Word64)
 
+import qualified Data.Text as ST
+import qualified Data.Text.Lazy as LT
+
 class Monoid a where
         mempty  :: a
         -- ^ Identity of 'mappend'
@@ -138,6 +141,16 @@ instance Monoid (B.ByteString) where
 instance Monoid (LB.ByteString) where
   mempty = LB.empty
   mappend = LB.append
+
+instance Monoid (LT.Text) where
+  mempty = LT.empty
+  mappend = LT.append
+
+instance Monoid (ST.Text) where
+  mempty = ST.empty
+  mappend = ST.append
+
+
 
 instance (Ord a) => Monoid (Map.Map a b) where
   mempty = Map.empty
