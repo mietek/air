@@ -114,13 +114,11 @@ slice l r = take r > drop l
 cherry_pick :: (Integral i) => [i] -> [a] -> [Maybe a]
 cherry_pick ids xs  = ids.map(\i -> xs.at i)
 
-reduce, reduce' :: (a -> a -> a) -> [a] -> a
+reduce :: (a -> a -> a) -> [a] -> a
 reduce = L.foldl1
-reduce' = L.foldl1'
 
-inject, inject' :: (Foldable t) => a -> (a -> b -> a) -> t b -> a
+inject :: (Foldable t) => a -> (a -> b -> a) -> t b -> a
 inject  = flip foldl
-inject' = flip foldl'
 
 select, reject :: (a -> Bool) -> [a] -> [a]
 select   = filter
