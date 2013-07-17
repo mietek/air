@@ -27,6 +27,8 @@ import qualified Data.ByteString.Lazy.Char8 as LazyByteString
 import qualified Data.ByteString.Char8 as StrictByteString
 import Data.Maybe (listToMaybe)
 
+import Air.Data.Default (def, Default)
+
 
 -- base DSL
 {-# INLINE (.) #-}
@@ -114,11 +116,15 @@ slice l r = take r > drop l
 cherry_pick :: (Integral i) => [i] -> [a] -> [Maybe a]
 cherry_pick ids xs  = ids.map(\i -> xs.at i)
 
-reduce :: (a -> a -> a) -> [a] -> a
-reduce = L.foldl1
 
-inject :: (Foldable t) => a -> (a -> b -> a) -> t b -> a
+
+inject, inject' :: (Foldable t) => a -> (a -> b -> a) -> t b -> a
 inject  = flip foldl
+inject' = flip foldl'
+
+reduce, reduce' :: (Default a, Foldable t) => (a -> a -> a) -> t a -> a
+reduce = inject def
+reduce' = inject' def
 
 select, reject :: (a -> Bool) -> [a] -> [a]
 select   = filter
