@@ -22,7 +22,6 @@ library
                 , bytestring >= 0.9
                 , directory
                 , filepath
-                , template-haskell
                 , dlist
                 , mtl
                 , time
@@ -34,15 +33,10 @@ library
                     Air
                   , Air.Light
                   , Air.Env
-                  , Air.TH.Here
-                  , Air.TH.Default
-                  , Air.TH.Air
-                  , Air.TH
                   , Air.SimpleMath
                   , Air.Control.Monad.ListBuilder
                   , Air.Control.Monad.ObjectBuilder
                   , Air.Data.Record.SimpleLabel
-                  , Air.Data.Record.SimpleLabel.TH
                   , Air.Data.Default
                   , Air.Data.Monoid
                   , Air.Data.Managed

@@ -1,5 +1,5 @@
 -- a fork of Sebastiaan Visser's BSD3 fclabels
-  
+
 {-# LANGUAGE TypeOperators, TypeSynonymInstances, TemplateHaskell #-}
 
 module Air.Data.Record.SimpleLabel
@@ -16,9 +16,6 @@ module Air.Data.Record.SimpleLabel
   , get, set, mod
   , getM, setM, modM
   , (=:)
-
-  -- * Derive labels using Template Haskell.
-  , module Air.Data.Record.SimpleLabel.TH
   )
 where
 
@@ -26,7 +23,6 @@ import Prelude hiding ((.), id, mod)
 import Control.Applicative
 import Control.Category
 import Control.Monad.State hiding (get)
-import Air.Data.Record.SimpleLabel.TH
 
 
 type Getter   s x   = s -> x
