@@ -11,7 +11,7 @@ Cabal-version:        >= 1.2
 category:             Development
 license-file:         LICENSE
 homepage:             https://github.com/nfjinjing/air
-data-files:           readme.md, changelog.md, known-issues.md
+extra-doc-files:      readme.md, changelog.md, known-issues.md
 
 library
 
