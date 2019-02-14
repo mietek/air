@@ -1,2 +1,8 @@
-An alternative Haskell Prelude library.
+-------------------------------------------------------------------------------
 
+This project is no longer maintained.
+
+-------------------------------------------------------------------------------
+
+
+An alternative Haskell Prelude library.
